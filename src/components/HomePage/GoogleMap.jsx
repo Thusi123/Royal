@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './GoogleMap.css'; // For styles
 import sriMap from '../../assets/sri.png'; // Adjust the path based on your project structure
-//import locationIcon from '../../assets/location.ico';
-import locationIcon from '/assets/location.ico';
+import locationIcon from '../../assets/location.ico';
 import Hotel_1 from '../../assets/Home.png';
 
 const GoogleMap = () => {
