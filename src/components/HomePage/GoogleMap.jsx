@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './GoogleMap.css'; // For styles
 import sriMap from '../../assets/sri.png'; // Adjust the path based on your project structure
-import locationIcon from '../../assets/location.ico';
-//import locationIcon from '@assets/location.ico';
+import { MdLocationOn } from 'react-icons/md'; // Import location icon from React Icons
 
 import Hotel_1 from '../../assets/Home.png';
 
@@ -67,7 +66,6 @@ const GoogleMap = () => {
             </div>
           </div>
         </div>
-       
       </div>
 
       {/* Right Side: Sri Lanka Map */}
@@ -82,7 +80,7 @@ const GoogleMap = () => {
           onMouseLeave={handleMouseLeave}
           onClick={() => handleClick('hotel1')}
         >
-          <img src={locationIcon} alt="Hotel 1" className="marker-icon" />
+          <MdLocationOn className="marker-icon" />
         </div>
 
         {/* Marker 2 */}
@@ -93,7 +91,7 @@ const GoogleMap = () => {
           onMouseLeave={handleMouseLeave}
           onClick={() => handleClick('hotel2')}
         >
-          <img src={locationIcon} alt="Hotel 2" className="marker-icon" />
+          <MdLocationOn className="marker-icon" />
         </div>
 
         {/* Marker 3 */}
@@ -104,7 +102,7 @@ const GoogleMap = () => {
           onMouseLeave={handleMouseLeave}
           onClick={() => handleClick('hotel3')}
         >
-          <img src={locationIcon} alt="Hotel 3" className="marker-icon" />
+          <MdLocationOn className="marker-icon" />
         </div>
 
         {/* Marker 4 */}
@@ -115,7 +113,7 @@ const GoogleMap = () => {
           onMouseLeave={handleMouseLeave}
           onClick={() => handleClick('hotel4')}
         >
-          <img src={locationIcon} alt="Hotel 4" className="marker-icon" />
+          <MdLocationOn className="marker-icon" />
         </div>
 
         {/* Hover Popups */}
