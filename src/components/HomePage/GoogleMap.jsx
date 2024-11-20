@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import './GoogleMap.css'; // For styles
-import sriMap from '../../assets/sri.png'; // Adjust the path based on your project structure
-import locationIcon from '../../assets/location.ico';
-import Hotel_1 from '../../assets/Home.png';
+import sriMap from '../../assets/sri.png'; // Path to the map image
+import locationIcon from '../../assets/location.ico'; // Path to the location marker icon
+import Hotel_1 from '../../assets/Home.png'; // Path to hotel image
 
 const GoogleMap = () => {
   const [hoveredPopup, setHoveredPopup] = useState(null); // For hover popups
   const [clickedPopup, setClickedPopup] = useState(null); // For click popups
 
+  // Handle hover popup
   const handleMouseEnter = (id) => {
     setHoveredPopup(id); // Show hover popup
   };
@@ -16,6 +17,7 @@ const GoogleMap = () => {
     setHoveredPopup(null); // Hide hover popup
   };
 
+  // Handle click popup
   const handleClick = (id) => {
     console.log(`Clicked on: ${id}`); // Debugging: Check the clicked popup
     if (clickedPopup === id) {
@@ -65,7 +67,6 @@ const GoogleMap = () => {
             </div>
           </div>
         </div>
-       
       </div>
 
       {/* Right Side: Sri Lanka Map */}
