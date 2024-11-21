@@ -124,14 +124,16 @@ const GoogleMap = () => {
           <img src={Hotel_1} alt="Hotel 1" />
           <h3>Hotel A</h3>
           <p>Hovered: Beautiful hotel in location A.</p>
+          <button className="more-btn">More</button>
         </div>
         <div
           className={`popup ${hoveredPopup === 'hotel2' ? 'visible' : ''}`}
-          style={{ top: '63%', left: '75%' }}
+          style={{ top: '63%', left: '60%' }}
         >
           <img src="https://via.placeholder.com/150" alt="Hotel 2" />
           <h3>Hotel B</h3>
           <p>Hovered: Lovely hotel in location B.</p>
+          <button className="more-btn">More</button>
         </div>
         <div
           className={`popup ${hoveredPopup === 'hotel3' ? 'visible' : ''}`}
@@ -140,6 +142,7 @@ const GoogleMap = () => {
           <img src="https://via.placeholder.com/150" alt="Hotel 3" />
           <h3>Hotel C</h3>
           <p>Hovered: Beautiful hotel in location C.</p>
+          <button className="more-btn">More</button>
         </div>
         <div
           className={`popup ${hoveredPopup === 'hotel4' ? 'visible' : ''}`}
@@ -148,6 +151,7 @@ const GoogleMap = () => {
           <img src="https://via.placeholder.com/150" alt="Hotel 4" />
           <h3>Hotel D</h3>
           <p>Hovered: Beautiful hotel in location D.</p>
+          <button className="more-btn">More</button>
         </div>
 
         {/* Click Popups */}
