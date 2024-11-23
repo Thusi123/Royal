@@ -146,13 +146,30 @@ const GoogleMap = () => {
 
         {/* Hover Popups */}
         <div
+<<<<<<< HEAD
+=======
+          className={`popup ${hoveredPopup === 'hotel1' ? 'visible' : ''}`}
+          style={{ top: '53%', left: '50%' }}
+        >
+          <img src={Hotel_1} alt="Hotel 1" />
+          <h3>Hotel A</h3>
+          <p>Hovered: Beautiful hotel in location A.</p>
+          <button className="more-btn">More</button>
+        </div>
+        <div
+>>>>>>> 7c2cd0979266d3d29348600c5ad62c7ec2839a46
           className={`popup ${hoveredPopup === 'hotel2' ? 'visible' : ''}`}
-          style={{ top: '63%', left: '75%' }}
+          style={{ top: '63%', left: '60%' }}
         >
           <img src={Hotel_2} alt="Hotel 2" />
           <h3>Hotel B</h3>
+<<<<<<< HEAD
           <button onClick={() => handleMoreClick('Hotel')}>More</button>
           
+=======
+          <p>Hovered: Lovely hotel in location B.</p>
+          <button className="more-btn">More</button>
+>>>>>>> 7c2cd0979266d3d29348600c5ad62c7ec2839a46
         </div>
         <div
           className={`popup ${hoveredPopup === 'hotel3' ? 'visible' : ''}`}
@@ -160,7 +177,12 @@ const GoogleMap = () => {
         >
           <img src={Hotel_3} alt="Hotel 3" />
           <h3>Hotel C</h3>
+<<<<<<< HEAD
           <button onClick={() => handleMoreClick('Hotel')}>More</button>
+=======
+          <p>Hovered: Beautiful hotel in location C.</p>
+          <button className="more-btn">More</button>
+>>>>>>> 7c2cd0979266d3d29348600c5ad62c7ec2839a46
         </div>
         <div
           className={`popup ${hoveredPopup === 'hotel4' ? 'visible' : ''}`}
@@ -169,7 +191,11 @@ const GoogleMap = () => {
           <img src="https://via.placeholder.com/150" alt="Hotel 4" />
           <h3>Hotel D</h3>
           <p>Hovered: Beautiful hotel in location D.</p>
+<<<<<<< HEAD
           <button onClick={() => handleMoreClick('Hotel')}>More</button>
+=======
+          <button className="more-btn">More</button>
+>>>>>>> 7c2cd0979266d3d29348600c5ad62c7ec2839a46
         </div>
 
         {/* Click Popups */}
