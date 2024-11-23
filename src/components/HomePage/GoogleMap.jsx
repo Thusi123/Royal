@@ -7,7 +7,7 @@ import { MdLocationOn } from 'react-icons/md';
 import Hotel_1 from '../../assets/HoteA/View.png';
 import Hotel_2 from '../../assets/HotelB.png';
 import Hotel_3 from '../../assets/HotelC.png';
-// Correct path for location icon
+
 
 const GoogleMap = () => {
   const [hoveredPopup, setHoveredPopup] = useState(null); // For hover popups
