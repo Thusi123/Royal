@@ -1,5 +1,3 @@
-// GoogleMap
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Correct import for navigation
 import './GoogleMap.css'; // For styles
@@ -9,8 +7,7 @@ import { MdLocationOn } from 'react-icons/md';
 import Hotel_1 from '../../assets/HoteA/View.png';
 import Hotel_2 from '../../assets/HotelB.png';
 import Hotel_3 from '../../assets/HotelC.png';
-
-
+import locationIcon from '../../assets/location.ico'; // Correct path for location icon
 
 const GoogleMap = () => {
   const [hoveredPopup, setHoveredPopup] = useState(null); // For hover popups
@@ -48,7 +45,7 @@ const GoogleMap = () => {
       {/* Left Side: Hotel List */}
       <div className="hotel-list">
         <div className="hotel-item">
-        <img src={Hotel_1} alt="Hotel 1" />
+          <img src={Hotel_1} alt="Hotel 1" />
           <div>
             <h4>Hotel A</h4>
             <p><strong>Price:</strong> LKR 5,297 per night</p>
@@ -66,7 +63,7 @@ const GoogleMap = () => {
         <div className="hotel-item">
           <img src={Hotel_2} alt="Hotel 2" />
           <div>
-          <h4>Hotel B</h4>
+            <h4>Hotel B</h4>
             <p><strong>Price:</strong> LKR 2,297 per night</p>
             <p><strong>Features:</strong> Free Wi-Fi • Free parking • Swimming pool • Spa services</p>
             <p><strong>Rating:</strong> ⭐⭐⭐ (2.5/5 based on 120 reviews)</p>
@@ -78,11 +75,12 @@ const GoogleMap = () => {
             </div>
           </div>
         </div>
+
         <div className="hotel-item">
           <img src={Hotel_3} alt="Hotel 3" />
           <div>
-          <h4>Hotel C</h4>
-          <p><strong>Price:</strong> LKR 1,999 per night</p>
+            <h4>Hotel C</h4>
+            <p><strong>Price:</strong> LKR 1,999 per night</p>
             <p><strong>Features:</strong> Free Wi-Fi • Free parking • Swimming pool • Spa services</p>
             <p><strong>Rating:</strong> ⭐⭐ (1.5/5 based on 50 reviews)</p>
             <p><strong>Description:</strong> Nestled in the hills, this cozy lodge features rustic charm, breathtaking mountain views, and a peaceful atmosphere, ideal for nature lovers and adventurers</p>
@@ -154,8 +152,8 @@ const GoogleMap = () => {
           <img src={Hotel_2} alt="Hotel 2" />
           <h3>Hotel B</h3>
           <button onClick={() => handleMoreClick('Hotel')}>More</button>
-          
         </div>
+
         <div
           className={`popup ${hoveredPopup === 'hotel3' ? 'visible' : ''}`}
           style={{ top: '67%', left: '40%' }}
@@ -163,19 +161,6 @@ const GoogleMap = () => {
           <img src={Hotel_3} alt="Hotel 3" />
           <h3>Hotel C</h3>
           <button onClick={() => handleMoreClick('Hotel')}>More</button>
-        </div>
-        <div
-          className={`popup ${hoveredPopup === 'hotel4' ? 'visible' : ''}`}
-          style={{ top: '43%', left: '50%' }}
-        >
-          <img src="https://via.placeholder.com/150" alt="Hotel 4" />
-          <h3>Hotel D</h3>
-          <p>Hovered: Beautiful hotel in location D.</p>
-
-          <button onClick={() => handleMoreClick('Hotel')}>More</button>
-
-          <button className="more-btn">More</button>
-
         </div>
 
         {/* Click Popups */}
@@ -189,7 +174,7 @@ const GoogleMap = () => {
         )}
         {clickedPopup === 'hotel2' && (
           <div className="popup" style={{ top: '53%', left: '75%' }}>
-            <img src="https://via.placeholder.com/150" alt="Hotel 2" />
+            <img src={Hotel_2} alt="Hotel 2" />
             <h3>Hotel B</h3>
             <p>Clicked: More details about Hotel B.</p>
             <button onClick={() => setClickedPopup(null)}>Close</button>
