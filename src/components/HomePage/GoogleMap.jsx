@@ -1,28 +1,43 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Correct import for navigation
 import './GoogleMap.css'; // For styles
 import sriMap from '../../assets/sri.png'; // Adjust the path based on your project structure
-import { MdLocationOn } from 'react-icons/md'; // Import location icon from React Icons
+import { MdLocationOn } from 'react-icons/md';
 
-import Hotel_1 from '../../assets/Home.png';
+import Hotel_1 from '../../assets/HoteA/View.png';
+import Hotel_2 from '../../assets/HotelB.png';
+import Hotel_3 from '../../assets/HotelC.png';
+
+
 
 const GoogleMap = () => {
   const [hoveredPopup, setHoveredPopup] = useState(null); // For hover popups
   const [clickedPopup, setClickedPopup] = useState(null); // For click popups
+  const navigate = useNavigate(); // Initialize useNavigate for navigation
 
+  // Handle mouse enter to show hover popup
   const handleMouseEnter = (id) => {
-    setHoveredPopup(id); // Show hover popup
+    setHoveredPopup(id);
   };
 
+  // Handle mouse leave to hide hover popup
   const handleMouseLeave = () => {
-    setHoveredPopup(null); // Hide hover popup
+    setHoveredPopup(null);
   };
 
+  // Handle click on marker to toggle click popup
   const handleClick = (id) => {
-    console.log(`Clicked on: ${id}`); // Debugging: Check the clicked popup
     if (clickedPopup === id) {
       setClickedPopup(null); // Close the popup if already open
     } else {
-      setClickedPopup(id); // Show popup on click
+      setClickedPopup(id); // Open the popup
+    }
+  };
+
+  // Handle click on "More" button
+  const handleMoreClick = (hotel) => {
+    if (hotel === 'HotelA') {
+      navigate('/hotel-details'); // Navigate to the HotelDetails page
     }
   };
 
@@ -31,38 +46,48 @@ const GoogleMap = () => {
       {/* Left Side: Hotel List */}
       <div className="hotel-list">
         <div className="hotel-item">
-          <img src={Hotel_1} alt="Hotel 1" />
+        <img src={Hotel_1} alt="Hotel 1" />
           <div>
             <h4>Hotel A</h4>
-            <p>LKR 2,297</p>
-            <span>Free Wi-Fi • Free parking</span>
+            <p><strong>Price:</strong> LKR 5,297 per night</p>
+            <p><strong>Features:</strong> Free Wi-Fi • Free parking • Swimming pool • Spa services</p>
+            <p><strong>Rating:</strong> ⭐⭐⭐⭐ (4.5/5 based on 500 reviews)</p>
+            <p><strong>Description:</strong> Enjoy comfort and modern amenities at Hotel A, perfect for families and business trips.</p>
             <div style={{ marginTop: '0.5rem' }}>
-              <button className="more-btn">More</button>
-              <button className="view-btn">Map</button>
+              <button className="more-btn" onClick={() => handleMoreClick('HotelA')}>
+                More
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="hotel-item">
+          <img src={Hotel_2} alt="Hotel 2" />
+          <div>
+          <h4>Hotel B</h4>
+            <p><strong>Price:</strong> LKR 2,297 per night</p>
+            <p><strong>Features:</strong> Free Wi-Fi • Free parking • Swimming pool • Spa services</p>
+            <p><strong>Rating:</strong> ⭐⭐⭐ (2.5/5 based on 120 reviews)</p>
+            <p><strong>Description:</strong> A beachfront retreat offering luxurious rooms with stunning ocean views, modern amenities, and exceptional service, perfect for a relaxing getaway.</p>
+            <div style={{ marginTop: '0.5rem' }}>
+              <button className="more-btn" onClick={() => handleMoreClick('HotelB')}>
+                More
+              </button>
             </div>
           </div>
         </div>
         <div className="hotel-item">
-          <img src="https://via.placeholder.com/100" alt="Hotel 2" />
+          <img src={Hotel_3} alt="Hotel 3" />
           <div>
-            <h4>Hotel B</h4>
-            <p>LKR 2,575</p>
-            <span>Free Wi-Fi • Free breakfast</span>
+          <h4>Hotel C</h4>
+          <p><strong>Price:</strong> LKR 1,999 per night</p>
+            <p><strong>Features:</strong> Free Wi-Fi • Free parking • Swimming pool • Spa services</p>
+            <p><strong>Rating:</strong> ⭐⭐ (1.5/5 based on 50 reviews)</p>
+            <p><strong>Description:</strong> Nestled in the hills, this cozy lodge features rustic charm, breathtaking mountain views, and a peaceful atmosphere, ideal for nature lovers and adventurers</p>
             <div style={{ marginTop: '0.5rem' }}>
-              <button className="more-btn">More</button>
-              <button className="view-btn">Map</button>
-            </div>
-          </div>
-        </div>
-        <div className="hotel-item">
-          <img src="https://via.placeholder.com/100" alt="Hotel 3" />
-          <div>
-            <h4>Hotel C</h4>
-            <p>LKR 2,575</p>
-            <span>Free Wi-Fi • Free breakfast</span>
-            <div style={{ marginTop: '0.5rem' }}>
-              <button className="more-btn">More</button>
-              <button className="view-btn">Map</button>
+              <button className="more-btn" onClick={() => handleMoreClick('HotelC')}>
+                More
+              </button>
             </div>
           </div>
         </div>
@@ -76,10 +101,24 @@ const GoogleMap = () => {
         <div
           className="marker"
           style={{ top: '55%', left: '30%' }}
-          onMouseEnter={() => handleMouseEnter('hotel1')}
-          onMouseLeave={handleMouseLeave}
-          onClick={() => handleClick('hotel1')}
+          onMouseEnter={() => setHoveredPopup('hotel1')}
+          onMouseLeave={() => setHoveredPopup(null)}
         >
+          <div
+            className={`popup ${hoveredPopup === 'hotel1' ? 'visible' : ''}`}
+            style={{
+              position: 'absolute',
+              bottom: '100%',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              marginBottom: '5px',
+            }}
+          >
+            <img src={Hotel_1} alt="Hotel 1" />
+            <h3>Hotel A</h3>
+            <p>Comfortable, modern, family-friendly, convenient, business-ready</p>
+            <button onClick={() => handleMoreClick('HotelA')}>More</button>
+          </div>
           <MdLocationOn className="marker-icon" />
         </div>
 
@@ -105,41 +144,23 @@ const GoogleMap = () => {
           <MdLocationOn className="marker-icon" />
         </div>
 
-        {/* Marker 4 */}
-        <div
-          className="marker"
-          style={{ top: '45%', left: '45%' }}
-          onMouseEnter={() => handleMouseEnter('hotel4')}
-          onMouseLeave={handleMouseLeave}
-          onClick={() => handleClick('hotel4')}
-        >
-          <MdLocationOn className="marker-icon" />
-        </div>
-
         {/* Hover Popups */}
-        <div
-          className={`popup ${hoveredPopup === 'hotel1' ? 'visible' : ''}`}
-          style={{ top: '53%', left: '50%' }}
-        >
-          <img src={Hotel_1} alt="Hotel 1" />
-          <h3>Hotel A</h3>
-          <p>Hovered: Beautiful hotel in location A.</p>
-        </div>
         <div
           className={`popup ${hoveredPopup === 'hotel2' ? 'visible' : ''}`}
           style={{ top: '63%', left: '75%' }}
         >
-          <img src="https://via.placeholder.com/150" alt="Hotel 2" />
+          <img src={Hotel_2} alt="Hotel 2" />
           <h3>Hotel B</h3>
-          <p>Hovered: Lovely hotel in location B.</p>
+          <button onClick={() => handleMoreClick('Hotel')}>More</button>
+          
         </div>
         <div
           className={`popup ${hoveredPopup === 'hotel3' ? 'visible' : ''}`}
           style={{ top: '67%', left: '40%' }}
         >
-          <img src="https://via.placeholder.com/150" alt="Hotel 3" />
+          <img src={Hotel_3} alt="Hotel 3" />
           <h3>Hotel C</h3>
-          <p>Hovered: Beautiful hotel in location C.</p>
+          <button onClick={() => handleMoreClick('Hotel')}>More</button>
         </div>
         <div
           className={`popup ${hoveredPopup === 'hotel4' ? 'visible' : ''}`}
@@ -148,6 +169,7 @@ const GoogleMap = () => {
           <img src="https://via.placeholder.com/150" alt="Hotel 4" />
           <h3>Hotel D</h3>
           <p>Hovered: Beautiful hotel in location D.</p>
+          <button onClick={() => handleMoreClick('Hotel')}>More</button>
         </div>
 
         {/* Click Popups */}

@@ -11,7 +11,7 @@
 .hotel-item {
   display: flex;
   gap: 4rem;
-  align-items: left;
+  align-items: flex-start;
   background: white;
   padding: 2rem;
   border: 1px solid #ddd;
@@ -24,14 +24,14 @@
 .hotel-list {
   flex: 4;
   transform: translateX(1%);
-  background-color: #f5f5f5; /*#f5f5f5*/
+  background-color: #f5f5f5;
   padding: 1rem;
   border-radius: 2px;
   width: 50%;
-  min-height: 300px; /* Minimum height */
-  max-height: 580px; /* Maximum height */
+  min-height: 300px;
+  max-height: 580px;
   overflow-y: auto;
-  margin-bottom: 20%; /* Scrollbar appears if content exceeds max height */
+  margin-bottom: 20%;
 }
 
 /* Hover Effect */
@@ -180,6 +180,7 @@
 .marker-icon {
   width: 40px;
   height: 40px;
+  color: #d90404;
 }
 
 /* Popup Styles */
@@ -189,18 +190,22 @@
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  transform: translate(-50%, -100%);
+  transform: translate(-40%, -100%);
   visibility: hidden;
   opacity: 0;
   transition: all 0.2s ease-in-out;
+  width: 200px;
 }
 
 .popup img {
-  width: 100px;
+  width: 160px;
   height: 100px;
   object-fit: cover;
   border-radius: 4px;
   margin-bottom: 0.5rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .popup h3 {
@@ -216,6 +221,8 @@
   padding: 0.5rem 1rem;
   cursor: pointer;
   font-size: 0.9rem;
+  display: block;
+  margin: 0 auto;
 }
 
 .popup button:hover {
@@ -232,7 +239,8 @@
   /* Adjust hotel-list and layout for mobile */
   .hotel-list {
     width: 100%;
-    margin-bottom: 10%; /* Adjust margin */
+    margin-bottom: 10%;
+    padding: 0.5rem;
   }
 
   .hotel-item {
@@ -290,5 +298,9 @@
   .view-btn {
     font-size: 0.75rem;
     padding: 0.3rem 0.6rem;
+  }
+
+  .map-container {
+    padding: 1rem;
   }
 }

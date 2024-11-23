@@ -4,6 +4,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import GoogleMap from "./GoogleMap"
 
+
 //import logImage from "../../assets/Home.png";
 
 const HomePage = () => {

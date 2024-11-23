@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginPage from './components/LoginPage';
 import SignupPage from './components/Signup';
-import HomePage from './components/HomePage/HomePage'; // Correct import for HomePage
+import HomePage from './components/HomePage/HomePage';
+import HotelDetailsPage from './components/HotelDetails';
+
 
 function App() {
     const [isSignup, setIsSignup] = useState(false);
@@ -16,15 +19,33 @@ function App() {
     };
 
     return (
-        <div>
-            {loggedIn ? (
-                <HomePage />  // Make sure this points to the imported component
-            ) : isSignup ? (
-                <SignupPage onToggle={handleToggle} />
-            ) : (
-                <LoginPage onToggle={handleToggle} onLogin={handleLogin} />
-            )}
-        </div>
+        <Router>
+            <Routes>
+                {/* Login or Signup */}
+                {!loggedIn && (
+                    <Route
+                        path="/"
+                        element={
+                            isSignup ? (
+                                <SignupPage onToggle={handleToggle} />
+                            ) : (
+                                <LoginPage onToggle={handleToggle} onLogin={handleLogin} />
+                            )
+                        }
+                    />
+                )}
+
+                {/* Authenticated Routes */}
+                {loggedIn && (
+                    <Route path="/" element={<HomePage />} />
+                )}
+
+
+
+                {/* Hotel Details Page */}
+                <Route path="/hotel-details" element={<HotelDetailsPage />} />
+            </Routes>
+        </Router>
     );
 }
 
