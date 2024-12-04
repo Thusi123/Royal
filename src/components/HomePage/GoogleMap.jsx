@@ -1,188 +1,180 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Correct import for navigation
-import './GoogleMap.css'; // For styles
-import sriMap from '../../assets/sri.png'; // Adjust the path based on your project structure
-import { MdLocationOn } from 'react-icons/md';
+import React, { useState } from "react";
+import { Link } from 'react-router-dom';
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
+import Hotel_1 from "../../assets/HoteA/View.png";
+import Hotel_2 from "../../assets/HotelB.png";
+import Hotel_3 from "../../assets/HotelC.png";
 
-import Hotel_1 from '../../assets/HoteA/View.png';
-import Hotel_2 from '../../assets/HotelB.png';
-import Hotel_3 from '../../assets/HotelC.png';
+// Custom marker icons
+const redIcon = new L.Icon({
+  iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
+  shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
 
+const OpenStreetMapComponent = () => {
+  const [selectedHotel, setSelectedHotel] = useState(null);
 
-const GoogleMap = () => {
-  const [hoveredPopup, setHoveredPopup] = useState(null); // For hover popups
-  const [clickedPopup, setClickedPopup] = useState(null); // For click popups
-  const navigate = useNavigate(); // Initialize useNavigate for navigation
-
-  // Handle mouse enter to show hover popup
-  const handleMouseEnter = (id) => {
-    setHoveredPopup(id);
-  };
-
-  // Handle mouse leave to hide hover popup
-  const handleMouseLeave = () => {
-    setHoveredPopup(null);
-  };
-
-  // Handle click on marker to toggle click popup
-  const handleClick = (id) => {
-    if (clickedPopup === id) {
-      setClickedPopup(null); // Close the popup if already open
-    } else {
-      setClickedPopup(id); // Open the popup
+  const locations = [
+    {
+      id: "hotelA",
+      lat: 6.5500,
+      lng: 80.0000,
+      name: "Hotel A",
+      description: "Enjoy comfort and modern amenities at Hotel A, perfect for families and business trips.",
+      price: "LKR 5,297 per night",
+      features: "Free Wi-Fi • Free parking • Swimming pool • Spa services",
+      rating: "⭐⭐⭐⭐ (4.5/5 based on 500 reviews)",
+      image: Hotel_1
+    },
+    {
+      id: "hotelB",
+      lat: 7.5000,
+      lng: 79.9940,
+      name: "Hotel B",
+      description: "A beachfront retreat offering luxurious rooms with stunning ocean views, modern amenities, and exceptional service, perfect for a relaxing getaway.",
+      price: "LKR 2,297 per night",
+      features: "Free Wi-Fi • Free parking • Swimming pool • Spa services",
+      rating: "⭐⭐⭐ (2.5/5 based on 120 reviews)",
+      image: Hotel_2
+    },
+    {
+      id: "hotel3",
+      lat: 6.8833,
+      lng: 79.9897,
+      name: "Hotel C",
+      description: "Nestled in the hills, this cozy lodge features rustic charm, breathtaking mountain views, and a peaceful atmosphere, ideal for nature lovers and adventurers.",
+      price: "LKR 1,999 per night",
+      features: "Free Wi-Fi • Free parking • Swimming pool ",
+      rating: "⭐⭐ (1.5/5 based on 50 reviews)",
+      image: Hotel_3
     }
-  };
-
-  // Handle click on "More" button
-  const handleMoreClick = (hotel) => {
-    if (hotel === 'HotelA') {
-      navigate('/hotel-details'); // Navigate to the HotelDetails page
-    }
-  };
+  ];
 
   return (
-    <div className="layout-container">
-      {/* Left Side: Hotel List */}
-      <div className="hotel-list">
-        <div className="hotel-item">
-          <img src={Hotel_1} alt="Hotel 1" />
-          <div>
-            <h4>Hotel A</h4>
-            <p><strong>Price:</strong> LKR 5,297 per night</p>
-            <p><strong>Features:</strong> Free Wi-Fi • Free parking • Swimming pool • Spa services</p>
-            <p><strong>Rating:</strong> ⭐⭐⭐⭐ (4.5/5 based on 500 reviews)</p>
-            <p><strong>Description:</strong> Enjoy comfort and modern amenities at Hotel A, perfect for families and business trips.</p>
-            <div style={{ marginTop: '0.5rem' }}>
-              <button className="more-btn" onClick={() => handleMoreClick('HotelA')}>
-                More
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="hotel-item">
-          <img src={Hotel_2} alt="Hotel 2" />
-          <div>
-            <h4>Hotel B</h4>
-            <p><strong>Price:</strong> LKR 2,297 per night</p>
-            <p><strong>Features:</strong> Free Wi-Fi • Free parking • Swimming pool • Spa services</p>
-            <p><strong>Rating:</strong> ⭐⭐⭐ (2.5/5 based on 120 reviews)</p>
-            <p><strong>Description:</strong> A beachfront retreat offering luxurious rooms with stunning ocean views, modern amenities, and exceptional service, perfect for a relaxing getaway.</p>
-            <div style={{ marginTop: '0.5rem' }}>
-              <button className="more-btn" onClick={() => handleMoreClick('HotelB')}>
-                More
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="hotel-item">
-          <img src={Hotel_3} alt="Hotel 3" />
-          <div>
-            <h4>Hotel C</h4>
-            <p><strong>Price:</strong> LKR 1,999 per night</p>
-            <p><strong>Features:</strong> Free Wi-Fi • Free parking • Swimming pool • Spa services</p>
-            <p><strong>Rating:</strong> ⭐⭐ (1.5/5 based on 50 reviews)</p>
-            <p><strong>Description:</strong> Nestled in the hills, this cozy lodge features rustic charm, breathtaking mountain views, and a peaceful atmosphere, ideal for nature lovers and adventurers</p>
-            <div style={{ marginTop: '0.5rem' }}>
-              <button className="more-btn" onClick={() => handleMoreClick('HotelC')}>
-                More
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Right Side: Sri Lanka Map */}
-      <div className="map-container">
-        <img src={sriMap} alt="Sri Lanka Map" className="map-image" />
-
-        {/* Marker 1 */}
-        <div
-          className="marker"
-          style={{ top: '55%', left: '30%' }}
-          onMouseEnter={() => setHoveredPopup('hotel1')}
-          onMouseLeave={() => setHoveredPopup(null)}
-        >
+    <div style={{ display: "flex", flexWrap: "wrap", height: "100vh" }}>
+      {/* Hotel List */}
+      <div
+        style={{
+          flex: "1 1 30%",
+          overflowY: "auto",
+          maxHeight: "100%",
+          padding: "10px",
+          boxSizing: "border-box",
+          borderRight: "1px solid #ccc",
+        }}
+      >
+        {locations.map((hotel) => (
           <div
-            className={`popup ${hoveredPopup === 'hotel1' ? 'visible' : ''}`}
+            key={hotel.id}
             style={{
-              position: 'absolute',
-              bottom: '100%',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              marginBottom: '5px',
+              border: "1px solid #ccc",
+              margin: "10px 0",
+              padding: "10px",
+              borderRadius: "8px",
+              backgroundColor: selectedHotel?.id === hotel.id ? "#ffe4e1" : "#fff",
             }}
           >
-            <img src={Hotel_1} alt="Hotel 1" />
-            <h3>Hotel A</h3>
-            <p>Comfortable, modern, family-friendly, convenient, business-ready</p>
-            <button onClick={() => handleMoreClick('HotelA')}>More</button>
+            <img
+              src={hotel.image}
+              alt={hotel.name}
+              style={{ width: "100%", height: "auto", borderRadius: "8px" }}
+            />
+            <h4>{hotel.name}</h4>
+            <p><strong>Price:</strong> {hotel.price}</p>
+            <p><strong>Features:</strong> {hotel.features}</p>
+            <p><strong>Rating:</strong> {hotel.rating}</p>
+            <p><strong>Description:</strong> {hotel.description}</p>
+
+            <Link to={`/hotel-details/${hotel.id}`}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+                    <button
+                      style={{
+                        marginTop: "10px",
+                        backgroundColor: "red",
+                        color: "white",
+                        border: "none",
+                        padding: "10px",
+                        borderRadius: "4px",
+                        cursor: "pointer",
+                        width: "200px",
+                      }}
+                    >
+                      More
+                    </button>
+                  </div>
+              
+            </Link>
           </div>
-          <MdLocationOn className="marker-icon" />
-        </div>
+        ))}
+      </div>
 
-        {/* Marker 2 */}
-        <div
-          className="marker"
-          style={{ top: '65%', left: '75%' }}
-          onMouseEnter={() => handleMouseEnter('hotel2')}
-          onMouseLeave={handleMouseLeave}
-          onClick={() => handleClick('hotel2')}
+      {/* Map Container */}
+      <div style={{ flex: "1 1 50%", height: "100%" }}>
+        <MapContainer
+          center={
+            selectedHotel
+              ? [selectedHotel.lat, selectedHotel.lng]
+              : [7.8731, 80.7718] // Default center coordinates for Sri Lanka
+          }
+          zoom={selectedHotel ? 6 : 8} // Adjust zoom based on selection
+          style={{ width: "100%", height: "100%" }}
         >
-          <MdLocationOn className="marker-icon" />
-        </div>
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          />
+          {locations.map((location) => (
+            <Marker
+              key={location.id}
+              position={[location.lat, location.lng]}
+              icon={redIcon}
+              eventHandlers={{
+                click: () => setSelectedHotel(location),
+              }}
+            >
+              <Popup>
+              <div>
+                <img
+                  src={location.image}
+                  alt={location.name}
+                  style={{ width: "100%", height: "auto", marginBottom: "5px" }}
+                />
+                <h4>{location.name}</h4>
+                <p>{location.description}</p>
+                {/* Use location.hotel or similar property if hotel is part of location */}
+                              <Link to={`/hotel-details/${location.id}`}>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <button
+                    style={{
+                      marginTop: "10px",
+                      backgroundColor: "red",
+                      color: "white",
+                      border: "none",
+                      padding: "10px",
+                      borderRadius: "4px",
+                      cursor: "pointer",
+                      width: "200px",
+                    }}
+                  >
+                    More
+                  </button>
+                </div>
+              </Link>
 
-        {/* Marker 3 */}
-        <div
-          className="marker"
-          style={{ top: '68%', left: '40%' }}
-          onMouseEnter={() => handleMouseEnter('hotel3')}
-          onMouseLeave={handleMouseLeave}
-          onClick={() => handleClick('hotel3')}
-        >
-          <MdLocationOn className="marker-icon" />
-        </div>
+              </div>
+            </Popup>
 
-        {/* Hover Popups */}
-        <div
-          className={`popup ${hoveredPopup === 'hotel2' ? 'visible' : ''}`}
-          style={{ top: '63%', left: '60%' }}
-        >
-          <img src={Hotel_2} alt="Hotel 2" />
-          <h3>Hotel B</h3>
-          <button onClick={() => handleMoreClick('Hotel')}>More</button>
-        </div>
-
-        <div
-          className={`popup ${hoveredPopup === 'hotel3' ? 'visible' : ''}`}
-          style={{ top: '67%', left: '40%' }}
-        >
-          <img src={Hotel_3} alt="Hotel 3" />
-          <h3>Hotel C</h3>
-          <button onClick={() => handleMoreClick('Hotel')}>More</button>
-        </div>
-
-        {/* Click Popups */}
-        {clickedPopup === 'hotel1' && (
-          <div className="popup" style={{ top: '48%', left: '85%' }}>
-            <img src={Hotel_1} alt="Hotel 1" />
-            <h3>Hotel A</h3>
-            <p>Clicked: More details about Hotel A.</p>
-            <button onClick={() => setClickedPopup(null)}>Close</button>
-          </div>
-        )}
-        {clickedPopup === 'hotel2' && (
-          <div className="popup" style={{ top: '53%', left: '75%' }}>
-            <img src={Hotel_2} alt="Hotel 2" />
-            <h3>Hotel B</h3>
-            <p>Clicked: More details about Hotel B.</p>
-            <button onClick={() => setClickedPopup(null)}>Close</button>
-          </div>
-        )}
+            </Marker>
+          ))}
+        </MapContainer>
       </div>
     </div>
   );
 };
 
-export default GoogleMap;
+export default OpenStreetMapComponent;

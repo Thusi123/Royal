@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginPage from './components/LoginPage';
 import SignupPage from './components/Signup';
 import HomePage from './components/HomePage/HomePage';
-import HotelDetailsPage from './components/HotelDetails';
+import HotelA from './components/HotelA';
+import HotelB from './components/HotelB';
 
 
 function App() {
@@ -43,7 +44,8 @@ function App() {
 
 
                 {/* Hotel Details Page */}
-                <Route path="/hotel-details" element={<HotelDetailsPage />} />
+                <Route path="/hotel-details/hotelA" element={<HotelA />} />
+                <Route path="/hotel-details/hotelB" element={<HotelB />} />
             </Routes>
         </Router>
     );
